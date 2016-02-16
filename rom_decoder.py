@@ -65,7 +65,20 @@ try:
   parcelstrloc = bootinfo.index("constant parcels-offset")
 except:
   parcelstrloc = bootinfo.index("constant lzss-offset")
+infosizeloc = bootinfo.index("constant info-size")
+elfoffsetloc = bootinfo.index("constant elf-offset")
+elfsizeloc = bootinfo.index("constant elf-size")
 startpos = int(bootinfo[parcelstrloc-7:parcelstrloc], 16)
+infoendpos = int(bootinfo[infosizeloc-7:infosizeloc], 16)
+elfoffset = int(bootinfo[elfoffsetloc-7:elfoffsetloc], 16)
+elfsize = int(bootinfo[elfsizeloc-7:elfsizeloc], 16)
+
+print "trampoline.elf @ %08x" % elfoffset
+f.seek(elfoffset)
+of = open("trampoline.elf", "w")
+of.write(f.read(elfsize))
+of.close()
+
 f.seek(startpos)
 assert f.read(4) == "prcl"
 f.read(4) # version maybe?
@@ -74,6 +87,8 @@ assert read32(f) == next_parcel_offset # ??
 f.read(4) # zeros?
 
 while True:
+	if next_parcel_offset == 0:
+		break
 	f.seek(startpos + next_parcel_offset)
 	next_parcel_offset = read32(f)
 	print "entry type: " + f.read(4)
@@ -116,3 +131,9 @@ while True:
 			data = f.read(uncomp_size)
 		outputfile.write(data)
 		f.seek(oldpos)
+
+# two PEF libraries surrounded by OF hex numbers ..
+f.seek(infoendpos)
+of = open("unknown.data", "w")
+of.write(f.read())
+of.close()
