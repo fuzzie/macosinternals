@@ -1,0 +1,74 @@
+gtbl 37 (newworld boot table):
+
+0001b81963ff0046 / header (gtbl, 70 entries)
+00000000ffff03e6 / gpch 998 - patches SynchIdleTime for LANDisk/bootp?
+00000000ffff02a0 / gpch 672 - patches AVLTreeDispatch(?) for ??
+00000000ffff029e / gpch 670 - patches AliasDispatch for ??
+00000000ffff7531 / gpch 30001 - patches [Balloon,PictUtils]Dispatch for ??
+0001707463680033 / ptch 51 (doesn't exist??)
+0004000000000000 / run second-stage init
+00000000ffff0046 / gpch 70 - patches NMInstall/NMRemove (Notification Manager) for ??
+00000000ffff029b / gpch 667 - ?? (qtcm?)
+00000000ffff01f4 / gpch 500 - ?? (Trackpad? also mentions boot-rom/via-pmu/adb:keyboard)
+00000000ffff03e7 / gpch 999 - patches a lot of TextEdit traps
+00000000ffff0010 / gpch 16 - patches ShutdownDispatch(?)
+00000000ffff0090 / gpch 144 - patches DisplayDispatch(?), huge patch
+00000000ffff0085 / gpch 133 - not sure, Backlight? patches DockingDispatch(?) only if it exists
+00030000ffff02c8 / gpch 712 - ??, 'sysv'/'demv' gestalts?
+000a00000000029a / nlib 666 / SoundLib
+00030000ffff029a / gpch 666 - patches a lot of Sound traps
+00030000ffff029d / gpch 669 - patches ThreadDispatch(?)
+00030000ffff02c7 / gpch 711 - ?? - patches ButtonMgr traps (manually) - lots of PowerDispatch so I guess this is not GUI? :)
+00030000ffff02f1 / gpch 753 - ?? - looks like probably filesystem stuff, but not sure..
+000900010000000a / fovr 10 / StdCLib
+000e000100000046 / cfrg 70 / StdCLib
+000e000000000037 / cfrg 55 / DisplayLib, PowerMgrLib, DragLib, ThreadsLib, TelephoneLib, Resources, ScriptUtils, CollectionsLib, Collections, Memory Manager, ObjectSupportLib, OSLData, NativeDriverLoaderLib, FoldersLib
+000e00000000003d / cfrg 61 / PCCardOTConfigurator, PCCard OTPortScanner, PCCard Serial Driver (ndrv), PCCard SRAM Driver (ndrv)
+000e00000000001c / cfrg 28 / NQDResidentCursor, ProcessMgrLib
+000a00000000bfe6 / nlib -16410 / QuickdrawLib
+000a00000000000b / nlib 11 / NQDResidentCursor
+000a000000000008 / nlib 8 / MathLibGlobals
+000e000000000034 / cfrg 52 / NQD, MemoryMgr, MathLib, UnicodeUtilitiesCoreLib, TextServices, FontManager, FMSharedCaches, IconUtils, QuickDrawText, Translation, NSLPPCLib, ATSSupport, AttributeGroup, OFAServices, FontObjects, FontObjectsGlobals, GlyphsCache, LayoutCore, TTScaler3, ATSStreaming, ATSGlue, ATSUnicodeLib
+000b000000000013 / ntrb 19 / MemoryMgrTraps
+000e000000000031 / cfrg 49 / IconServicesLib, ListsLib, ControlsLib, ControlDefinitions, WindowsLib, WindowDefinitions, EventsLib, MacDialogsLib, MenusLib, ToolboxUtils, AppearanceLib, ToolboxBootstrap, PreferencesLib, DataBrowserLib, DataBrowserCntl
+000e000000000043 / cfrg 67 [doesn't exist?]
+000e000000000040 / cfrg 64 / CoreFoundationLib, CoreFoundationGlobalsLib, StringCompare, DateTimeUtils, NumberFormatting, TextUtils, Textension, LocalesLib, UnicodeUtilitiesLib, Languages, AppleTalk Navigation Real, Navigation Real, NavigationFTP,, NavigationLib, DesktopItemsLib
+000e00000000004c / cfrg 76 / AppleScriptLib, ProcessMgrLib, vecLib, vBasicOps, vBigNum, vMathLib, vectorOps, DelayedEventsLib
+000e00000000004f / cfrg 79 / DragLib, ASPLib, ASPUtilLib, ASPScalarPlugin, ASPAltivecPlugin
+000a0000000000c6 / nlib 198 / MTCursorLib
+000a00000000b0d8 / nlib -20264 / CursorDevicesLib
+000a00000000afc8 / nlib -20536 / DAVAudioPlugin
+000a00000000ae48 / nlib -20920 / SndIOLib
+000a00000000afc7 / nlib -20537 / GCAwacsPlugin
+000a00000000af3f / nlib -20673 / BurgundyPlugin
+000a00000000ae4a / nlib -20918 / DacaPlugin
+000a00000000ad67 / nlib -21145 / DigitalCDSoundLib
+000a00000000ae03 / nlib -20989 / DigitalSndPlugin
+000a00000000ae02 / nlib -20990 / SndHWUtilitiesLib
+000a00000000af28 / nlib -20696 / SndHWPluginMgrLib
+000a00000000ae20 / nlib -20960 / SndHWLib
+000a00000000ae3b / nlib -20933 / USBAudioPlugin
+000a00000000ae49 / nlib -20919 / I2SAudioPlugin
+000a00000000ac37 / nlib -21449 / TumblerPlugin
+000a00000000ac98 / nlib -21352 / VirtualHALPlugin
+000b00000000000b / ntrb 11 / NQDTraps
+000b00000000000f / ntrb 15 / FontManagerTraps
+000b000000000012 / ntrb 18 / QuickdrawTextTraps
+000b000000000011 / ntrb 17 / ResourcesTraps
+000b00000000bff9 / ntrb -16391 / ScriptUtilsTraps
+000a00000000ae05 / nlib -20987 / PPCToolbox
+000b00000000ae05 / ntrb -20987 / PPCToolboxTraps
+000b00000000bff2 / ntrb -16398 / TextServicesTraps
+000b00000000000c / ntrb 12 / IconUtilsTraps
+000b00000000002a / ntrb 42 / TranslationTraps
+000b00000000bffb / ntrb -16389 / TextUtilsTraps
+000b00000000ae3d / ntrb -20931 / DateTimeUtilsTraps
+00030000ffff0045 / gpch 69 - patches CommResourcesDispatch(?)
+000b0000000000c6 / ntrb 198 / CursorNTRB
+000b000000000021 / ntrb 33 / CollectionsTraps
+000b00000000b042 / ntrb -20414 / IntlUtilsTrap
+000a00000000b108 / nlib -20216 / PCSerialLib
+0012000000000000 / load fragment???
+00000000ffff030b / gpch 779 - patches LanguageMgr, CleanupApplication, InsertMenu, HOpenResFile, CloseResFile, ProcessMgr
+00030000ffff00f6 / gpch 246 [doesn't exist?]
+0013000000000002 / ??

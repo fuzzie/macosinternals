@@ -1,0 +1,42 @@
+system patching at 'boot':
+
+* load 'gusd' resource
+  list starts 6 bytes in, ('mach' gestalt id, 'gtbl' resource id) pairs (both (16-bit) words)
+  in NewWorld, 'mach' is 0x196 (406) and OS 9.2 matches it with 'gtbl' resource 0x25 (37)
+* load 'lodr' resource (0xbfff = -16385), which is called as subroutine
+* load 'gtbl' resource
+  word count is 6 bytes in (0x46 = 70 entries in OS 9.2)
+  each entry is 8 bytes; last 2 bytes are generally resource id, but see below
+  first word is type, between 0 and 21
+    0: load 'gpch' and run lodr on it
+    3: like 0, but fails silently if it doesn't exist (rather than SysError)
+    1: custom type (type specified in bytes 3-6)
+    2: custom [as above] -  but load from ROM(?)
+    4: content is ignored, loader goes off and runs some init code when encountering this
+    5: ignored
+    7: ignored
+    8-12: something custom? (0 'sfvr', 1 'fovr', 2 'nlib', 3 'ncod', 4 'ntrb')
+    14/17: try loading resources from 'cfrg'?
+    15: try loading resources from 'cfrg', differently..
+    16: ignored
+    18: load fragment?
+    13: error 12
+    19: something with 'sysa'
+    20: something with 'asup'/'cfrg'
+    21: does some tests or else calls _Debugger
+
+'gpch' format (loaded by lodr):
+  first 16 bytes are skipped (0001 + gpch + ???)
+  first word is a count of entries
+  then each entry is id, plus a long entry size (not including these first 6 bytes), then entry data
+  first ids are 1, 2, 4, 8, 16 (always 0xe size?)
+  loader then encounters entries with 0x20 set (actually always just one?)
+  after that, it should find a 0x3f entry, then it is done
+
+  guesswork on the 0x20 entry: starts with 0x2 word, then long is length of code (from after the long)
+  after code is 0xffff [word], then 0000, then a bunch of stuff, then 0000 at the end entry?
+  if we exclude 0xfc/0xfd/0xfe/0xff, then the remaining bytes sum to the number of words in the code (i.e. length/2)
+  more guesswork: each byte marks a function, EXCEPT if there's a 0xfd after it. 0xfc terminates the run.
+  (this might be relocations or something; 0xfd usually seems to mark an 'ori.b')
+
+  guesswork on the 0x3f entry: there are trap numbers in here :)

@@ -1,0 +1,29 @@
+early mac boot notes
+
+apply ptch 0xab89 (-2126)
+don't apply ptch 0x9c (156)/0x38f (911) (due to being newworld)
+load NameRegistryLib
+.. so we can set 'yum ' according to the machine colour
+.... (before drawing the startup screen!)
+do ReplaceVideoDriverLib unless some key is held down, maybe?
+then draw the startup screen (grab PICT)
+[boot disk stuff?]
+
+[.....]
+
+load TimeManagerLib, call something??
+apply ptch 0xaffd (-20483), which replaces the CacheMgr trap
+
+[.....]
+
+apply ptch 0xab34 (-21708); contains mac-io string and a lot of MP (multiprocessing) imports
+
+[.....]
+
+sometimes apply ptch 0x29 (41)?? doesn't seem to exist anyway
+
+[.....]
+
+apply ptch 0xaf5f (-20641), status 'LoadStartupDispatch'
+
+[.....]
