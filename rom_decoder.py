@@ -56,7 +56,13 @@ def read8(f):
 
 import sys
 f = open(sys.argv[1])
-startpos = 0x1c008 # FIXME
+bootinfo = ""
+while True:
+  c = f.read(1)
+  if c == '\x00': break
+  bootinfo = bootinfo + c
+parcelstrloc = bootinfo.index("constant parcels-offset")
+startpos = int(bootinfo[parcelstrloc-7:parcelstrloc], 16)
 f.seek(startpos)
 assert f.read(4) == "prcl"
 f.read(4) # version maybe?
