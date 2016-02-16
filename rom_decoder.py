@@ -61,7 +61,10 @@ while True:
   c = f.read(1)
   if c == '\x00': break
   bootinfo = bootinfo + c
-parcelstrloc = bootinfo.index("constant parcels-offset")
+try:
+  parcelstrloc = bootinfo.index("constant parcels-offset")
+except:
+  parcelstrloc = bootinfo.index("constant lzss-offset")
 startpos = int(bootinfo[parcelstrloc-7:parcelstrloc], 16)
 f.seek(startpos)
 assert f.read(4) == "prcl"
